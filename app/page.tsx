@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import Journal from "./Journal";
 import Matcher from "./Matcher";
+import Experience from "./Experience";
 
 type Product={name:string;subtitle:string;profile:string;price:number;image:string;strength:string};
 const basePath=process.env.NEXT_PUBLIC_BASE_PATH||"";
@@ -23,7 +24,7 @@ export default function Home(){
  const visible=filter==="Todos"?products:products.filter(p=>p.strength===filter),count=Object.values(cart).reduce((a,b)=>a+b,0),total=useMemo(()=>products.reduce((s,p)=>s+p.price*(cart[p.name]||0),0),[cart]);
  function add(name:string){setCart(c=>({...c,[name]:(c[name]||0)+1}));setNotice(`${name} se añadió a tu selección`);setTimeout(()=>setNotice(""),2200)}
  function update(name:string,delta:number){setCart(c=>({...c,[name]:Math.max(0,(c[name]||0)+delta)}))}
- return <main>
+ return <main><Experience/>
  {ageOpen&&<div className="age-gate" role="dialog" aria-modal="true"><div className="age-card"><div className="seal">PN</div><p className="eyebrow">Acceso responsable</p><h2>¿Eres mayor de 18 años?</h2><p>Este sitio presenta productos de tabaco destinados exclusivamente a personas adultas en Ecuador.</p><div className="age-actions"><button className="button primary" onClick={()=>setAgeOpen(false)}>Sí, soy mayor de 18</button><a className="button ghost" href="https://www.google.com">No, salir del sitio</a></div><small>El consumo de tabaco es nocivo para la salud.</small></div></div>}
  <header className="nav"><a className="brand" href="#inicio"><img className="brand-logo" src={asset("/images/logo-perro-negro.svg")} alt="Logo Perro Negro" width="52" height="52"/><span>PERRO NEGRO<small>Tabaco ecuatoriano</small></span></a><nav><a href="#bitacora">Bitácora</a><a href="#origen">El oficio</a><a href="#recomendador">Tu puro</a><a href="#puros">La jauría</a></nav><button className="cart-button" onClick={()=>setCartOpen(true)}>Bolsa <span>{count}</span></button></header>
  <section className="hero" id="inicio" style={{backgroundImage:`url('${asset("/images/hero.svg")}')`}}><div className="hero-overlay"/><div className="hero-content"><p className="eyebrow">Hecho a mano en Ecuador</p><h1>El carácter de nuestra tierra, <em>en cada hoja.</em></h1><p className="hero-copy">Puros artesanales elaborados con tabaco negro ecuatoriano, hojas enteras y el oficio de maestras enrolladoras.</p><a className="button light" href="#puros">Conoce la jauría <span>↓</span></a></div><div className="hero-note"><span>01</span><p>Orgánico<br/>Natural<br/>Artesanal</p></div></section>
