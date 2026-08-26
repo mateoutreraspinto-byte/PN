@@ -1,6 +1,6 @@
 name: Publicar tienda en GitHub Pages
 
-# Publicación reactivada después de habilitar GitHub Pages.
+# Publicación optimizada: imágenes locales y carga progresiva.
 on:
   push:
     branches: [main]
