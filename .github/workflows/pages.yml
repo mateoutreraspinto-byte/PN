@@ -1,5 +1,6 @@
 name: Publicar tienda en GitHub Pages
 
+# Publicación reactivada después de habilitar el repositorio público.
 on:
   push:
     branches: [main]
